@@ -9,6 +9,33 @@
     <link rel="stylesheet" crossorigin href="/goit-js-hw-12/assets/index-DvPDDfy5.css">
   </head>
   <body>
+    <header class="container">
+      <form class="form" id="search-form">
+        <input
+          type="text"
+          name="searchQuery"
+          placeholder="Search images..."
+          required
+        />
+        <button type="submit">Search</button>
+      </form>
+    </header>
+
+    <main class="container">
+      <ul class="gallery" id="gallery"></ul>
+
+      <div class="loader-backdrop " id="loader">
+        <span class="loader"></span>
+      </div>
+
+      <button type="button" id="load-more" class="load-more">
+        Load more
+      </button>
+    </main>
+
+    <footer class="container">
+      <p>&copy; 2025 Pixabay Search App</p>
+    </footer>
     
   </body>
 </html>
