@@ -6,6 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Last 12 HomeWork</title>
     <link rel="stylesheet" href="./css/styles.css" />
+  <style>
+      .hidden {
+        display: none !important;
+      }
+    </style>
   </head>
   <body>
     <header class="container">
@@ -23,11 +28,11 @@
     <main class="container">
       <ul class="gallery" id="gallery"></ul>
 
-      <div class="loader-backdrop " id="loader">
+      <div class="loader-backdrop hidden" id="loader">
         <span class="loader"></span>
       </div>
 
-      <button type="button" id="load-more" class="load-more">
+      <button type="button" id="load-more" class="load-more hidden">
         Load more
       </button>
     </main>
@@ -35,7 +40,7 @@
     <footer class="container">
       <p>&copy; 2025 Pixabay Search App</p>
     </footer>
-    
+
     <script type="module" src="./main.js"></script>
   </body>
 </html>
