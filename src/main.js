@@ -67,7 +67,7 @@ async function onSearch(event) {
     renderGallery(data.hits);
 
     const totalPages = Math.ceil(data.totalHits / perPage);
-    if (page < totalPages) {
+    if (totalPages > 1) {
       showLoadMoreBtn();
     } else {
       iziToast.info({
