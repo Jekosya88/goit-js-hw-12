@@ -29,20 +29,13 @@ async function onSearch(event) {
   event.preventDefault();
   console.log('DEBUG: onSearch triggered ✅');
 
-  console.log(
-    'DEBUG: event.currentTarget.elements =',
-    event.currentTarget.elements
-  );
   const searchInput = event.currentTarget.elements['searchQuery'];
-
   if (!searchInput) {
-    console.error('❌ ERROR: searchQuery input not found ');
+    console.error('❌ ERROR: searchQuery input not found');
     return;
   }
 
   const searchValue = searchInput.value.trim();
-  console.log('DEBUG: searchValue =', searchValue);
-
   if (!searchValue) {
     iziToast.error({
       title: 'Error',
@@ -62,12 +55,7 @@ async function onSearch(event) {
     const data = await fetchImages(query, page, perPage);
     console.log('DEBUG: fetchImages response =', data);
 
-    if (!data || !data.hits) {
-      console.error('❌ ERROR: API response is invalid');
-      return;
-    }
-
-    if (data.hits.length === 0) {
+    if (!data || !data.hits || data.hits.length === 0) {
       iziToast.warning({
         title: 'No results',
         message: 'Sorry, no images found. Try another search!',
@@ -78,9 +66,17 @@ async function onSearch(event) {
 
     renderGallery(data.hits);
 
-    if (data.totalHits > perPage) {
+    const totalPages = Math.ceil(data.totalHits / perPage);
+    if (page < totalPages) {
       showLoadMoreBtn();
+    } else {
+      iziToast.info({
+        title: 'End of results',
+        message: 'You have reached the end of search results.',
+        position: 'topRight',
+      });
     }
+
   } catch (error) {
     console.error('❌ ERROR in onSearch:', error);
     iziToast.error({
@@ -103,7 +99,7 @@ async function onLoadMore() {
     const data = await fetchImages(query, page, perPage);
     console.log('DEBUG: fetchImages response (load more) =', data);
 
-    renderGallery(data.hits, true);
+    renderGallery(data.hits,);
 
     const totalPages = Math.ceil(data.totalHits / perPage);
     if (page < totalPages) {
